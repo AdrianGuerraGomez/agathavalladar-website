@@ -1,0 +1,117 @@
+/* Botones ----------------------------------------------------------------- */
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: 2.5rem;
+  padding: 0 var(--space-4);
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  font-size: var(--text-base-ui);
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+  transition: background-color var(--duration-fast) var(--ease), border-color var(--duration-fast) var(--ease),
+    color var(--duration-fast) var(--ease);
+}
+.button:disabled { opacity: 0.55; cursor: not-allowed; }
+.buttonSm { min-height: 2rem; padding: 0 var(--space-3); font-size: var(--text-sm); }
+
+.button-primary { background: var(--color-ink); color: var(--color-bg); }
+.button-primary:hover:not(:disabled) { background: var(--color-accent); }
+.button-secondary { border-color: var(--color-ink); color: var(--color-ink); }
+.button-secondary:hover:not(:disabled) { background: var(--color-ink); color: var(--color-bg); }
+.button-ghost { color: var(--color-text); }
+.button-ghost:hover:not(:disabled) { background: var(--color-surface-sunken); }
+.button-danger { background: var(--color-danger); color: #fff; }
+.button-danger:hover:not(:disabled) { background: #7d2424; }
+
+.buttonSpinner,
+.spinner {
+  display: inline-block;
+  width: 0.9em;
+  height: 0.9em;
+  border: 1.5px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: spin 700ms linear infinite;
+}
+.spinner { width: 1.25rem; height: 1.25rem; color: var(--color-muted); }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.pageLoader { display: grid; place-items: center; min-height: 50vh; }
+
+.linkButton {
+  color: var(--color-accent);
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+/* Estados ----------------------------------------------------------------- */
+.empty {
+  padding: var(--space-8) 0;
+  border-top: var(--hairline);
+  text-align: left;
+}
+.emptyTitle { font-size: var(--text-lg); font-weight: 600; color: var(--color-ink); }
+.emptyBody { margin-top: var(--space-2); color: var(--color-muted); max-width: 32rem; }
+
+.error {
+  display: flex;
+  gap: var(--space-3);
+  align-items: flex-start;
+  padding: var(--space-4);
+  border-left: 2px solid var(--color-danger);
+  background: var(--color-danger-soft);
+  color: var(--color-danger);
+  font-size: var(--text-base-ui);
+}
+.error svg { margin-top: 0.2em; }
+
+/* Avisos (toasts) --------------------------------------------------------- */
+.toasts {
+  position: fixed;
+  right: var(--space-5);
+  bottom: var(--space-5);
+  z-index: 1000;
+  display: grid;
+  gap: var(--space-2);
+  width: min(26rem, calc(100vw - 2rem));
+}
+.toast {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius);
+  background: var(--color-ink);
+  color: var(--color-bg);
+  font-size: var(--text-base-ui);
+  box-shadow: var(--shadow-pop);
+  animation: toast-in var(--duration) var(--ease) both;
+}
+.toast-error { background: var(--color-danger); }
+.toastIcon { opacity: 0.85; }
+.toast-success .toastIcon { color: #9fc7b2; }
+.toastClose { opacity: 0.6; padding: var(--space-1); }
+.toastClose:hover { opacity: 1; }
+@keyframes toast-in { from { opacity: 0; transform: translateY(8px); } }
+@media (max-width: 640px) { .toasts { right: var(--space-4); bottom: var(--space-4); } }
+
+/* Diálogo ----------------------------------------------------------------- */
+.dialog {
+  width: min(28rem, calc(100vw - 2rem));
+  padding: var(--space-6);
+  border: var(--hairline);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  color: var(--color-text);
+  box-shadow: var(--shadow-pop);
+}
+.dialog::backdrop { background: var(--color-overlay); }
+.dialogTitle { font-size: var(--text-lg); letter-spacing: var(--tracking-snug); }
+.dialogBody { margin-top: var(--space-3); color: var(--color-muted); font-size: var(--text-base-ui); }
+.dialogActions { display: flex; justify-content: flex-end; gap: var(--space-2); margin-top: var(--space-6); }

@@ -1,0 +1,161 @@
+.progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 60;
+  height: 2px;
+  background: var(--color-accent);
+  transform-origin: left;
+  transform: scaleX(0);
+  will-change: transform;
+}
+
+.header {
+  max-width: calc(var(--measure) + var(--gutter) * 2);
+  padding-top: clamp(2.5rem, 1.5rem + 4vw, 5rem);
+}
+
+.breadcrumb {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+.breadcrumb > a:first-child { transition: color var(--duration-fast) var(--ease); }
+.breadcrumb > a:first-child:hover { color: var(--color-ink); }
+
+.title {
+  margin-top: var(--space-5);
+  font-size: var(--text-h1);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+}
+
+.excerpt {
+  margin-top: var(--space-5);
+  max-width: 40rem;
+  font-size: var(--text-lead);
+  line-height: 1.5;
+  color: var(--color-muted);
+  letter-spacing: -0.005em;
+}
+
+.meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-4);
+  margin-top: var(--space-6);
+  padding-block: var(--space-3);
+  border-top: var(--rule-strong);
+  border-bottom: var(--hairline);
+}
+.metaText { display: grid; gap: 2px; }
+.author { color: var(--color-ink); font-size: var(--text-base-ui); font-weight: 600; }
+.metaLine { color: var(--color-muted); font-size: var(--text-sm); }
+
+.figure { margin-block: var(--space-7); }
+.figureWide {
+  max-width: var(--measure-wide);
+  margin-inline: auto;
+  margin-top: var(--space-6);
+  margin-bottom: var(--space-7);
+}
+.caption {
+  margin-top: var(--space-3);
+  margin-inline: auto;
+  color: var(--color-muted);
+  font-size: var(--text-sm);
+  line-height: 1.5;
+  max-width: var(--measure);
+}
+
+.bodyWrap {
+  max-width: calc(var(--measure) + var(--gutter) * 2);
+}
+.body { margin-inline: auto; }
+
+.footer {
+  margin-top: var(--space-8);
+  padding-top: var(--space-5);
+  border-top: var(--rule-strong);
+  display: grid;
+  gap: var(--space-6);
+}
+.authorBox {
+  display: grid;
+  gap: var(--space-2);
+  padding: var(--space-5);
+  background: var(--color-surface-sunken);
+  border-radius: var(--radius);
+  font-size: var(--text-base-ui);
+  line-height: 1.6;
+}
+.authorBox .label { color: var(--color-muted); font-size: var(--text-xs); }
+.authorBox strong { color: var(--color-ink); font-weight: 600; }
+.authorBox a { color: var(--color-accent); text-decoration: underline; text-underline-offset: 0.2em; }
+
+.adjacent {
+  max-width: calc(var(--measure-wide) + var(--gutter) * 2);
+  margin-top: var(--space-9);
+}
+.adjacentGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-top: var(--hairline);
+  border-bottom: var(--hairline);
+}
+.adjacentLink {
+  display: grid;
+  gap: var(--space-2);
+  align-content: start;
+  padding: var(--space-6) var(--space-5) var(--space-6) 0;
+}
+.adjacentNext {
+  text-align: right;
+  padding: var(--space-6) 0 var(--space-6) var(--space-5);
+  border-left: var(--hairline);
+}
+.adjacentLabel {
+  display: inline-flex;
+  gap: var(--space-2);
+  align-items: center;
+  color: var(--color-muted);
+  font-size: var(--text-xs);
+}
+.adjacentNext .adjacentLabel { justify-content: flex-end; }
+.adjacentTitle {
+  color: var(--color-ink);
+  font-size: var(--text-lg);
+  font-weight: 600;
+  letter-spacing: var(--tracking-snug);
+  line-height: 1.3;
+  transition: color var(--duration-fast) var(--ease);
+}
+.adjacentLink:hover .adjacentTitle { color: var(--color-accent); }
+
+.back {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-6);
+  font-size: var(--text-base-ui);
+  font-weight: 500;
+  color: var(--color-text);
+  transition: color var(--duration-fast) var(--ease);
+}
+.back svg { font-size: 0.75em; }
+.back:hover { color: var(--color-accent); }
+
+@media (max-width: 640px) {
+  .meta { flex-direction: column; align-items: flex-start; }
+  .adjacentGrid { grid-template-columns: 1fr; }
+  .adjacentLink, .adjacentNext { padding: var(--space-5) 0; text-align: left; border-left: 0; }
+  .adjacentNext { border-top: var(--hairline); }
+  .adjacentNext .adjacentLabel { justify-content: flex-start; }
+}
