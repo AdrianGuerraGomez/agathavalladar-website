@@ -82,9 +82,10 @@ const now = new Date().toISOString();
   check(!data || data.length === 0, 'No puede listar el bucket de imágenes');
 }
 {
-  const { data, error } = await anon.auth.signUp({ email: `prueba-${Date.now()}@example.com`, password: 'Una-clave-larga-123!' });
-  const blocked = !!error || !data.user;
-  check(blocked, 'El registro público está desactivado', blocked ? undefined : 'Desactiva «Allow new users to sign up» en Supabase → Authentication → Sign In / Providers');
+  // Consulta la configuración pública de Auth (no crea usuarios ni envía emails).
+  const res = await fetch(`${url}/auth/v1/settings`, { headers: { apikey: key } });
+  const settings = res.ok ? await res.json() : {};
+  check(settings.disable_signup === true, 'El registro público está desactivado', 'Desactiva «Allow new users to sign up» en Supabase → Authentication → Sign In / Providers');
 }
 
 // --------------------------------------------------------------------------
