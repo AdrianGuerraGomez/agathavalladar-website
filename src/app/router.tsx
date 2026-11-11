@@ -3,6 +3,7 @@ import { PublicLayout } from '@/components/layout/PublicLayout';
 import { PageLoader } from '@/components/ui/Spinner';
 import About from '@/pages/About';
 import Archive from '@/pages/Archive';
+import Contact from '@/pages/Contact';
 import ArticlePage from '@/pages/ArticlePage';
 import Home from '@/pages/Home';
 import NotFound from '@/pages/NotFound';
@@ -22,6 +23,7 @@ export const router = createBrowserRouter([
       { path: 'publicaciones', element: <Archive /> },
       { path: 'publicaciones/:slug', element: <ArticlePage /> },
       { path: 'sobre-mi', element: <About /> },
+      { path: 'contacto', element: <Contact /> },
       { path: '*', element: <NotFound /> },
     ],
   },
@@ -38,6 +40,7 @@ export const router = createBrowserRouter([
           { path: 'articulos/nuevo', lazy: async () => ({ Component: (await import('@/admin/pages/ArticleEditor')).default }) },
           { path: 'articulos/:id', lazy: async () => ({ Component: (await import('@/admin/pages/ArticleEditor')).default }) },
           { path: 'categorias', lazy: async () => ({ Component: (await import('@/admin/pages/Categories')).default }) },
+          { path: 'mensajes', lazy: async () => ({ Component: (await import('@/admin/pages/Messages')).default }) },
           { path: 'perfil', lazy: async () => ({ Component: (await import('@/admin/pages/ProfileEditor')).default }) },
         ],
       },

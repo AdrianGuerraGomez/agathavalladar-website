@@ -1,0 +1,46 @@
+.list { border-top: var(--hairline); }
+.item { border-bottom: var(--hairline); }
+.summary {
+  display: grid;
+  grid-template-columns: 0.5rem minmax(10rem, 14rem) minmax(0, 1fr) auto;
+  align-items: center;
+  gap: var(--space-4);
+  width: 100%;
+  padding: var(--space-4) var(--space-2);
+  text-align: left;
+  font-size: var(--text-base-ui);
+  transition: background-color var(--duration-fast) var(--ease);
+}
+.summary:hover { background: var(--color-surface-sunken); }
+.dot { width: 0.5rem; height: 0.5rem; border-radius: 50%; }
+.unread .dot { background: var(--color-accent); }
+.from { display: grid; min-width: 0; }
+.from strong { color: var(--color-ink); font-weight: 500; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.from span { font-size: var(--text-xs); color: var(--color-muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.unread .from strong { font-weight: 700; }
+.subject { color: var(--color-muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.unread .subject { color: var(--color-ink); }
+.date { color: var(--color-muted); font-size: var(--text-xs); white-space: nowrap; }
+.body { padding: 0 var(--space-2) var(--space-5) calc(0.5rem + var(--space-4) + var(--space-2)); }
+.bodySubject { font-weight: 600; color: var(--color-ink); margin-bottom: var(--space-2); }
+.bodyText { white-space: pre-wrap; line-height: 1.65; max-width: 44rem; }
+.actions { display: flex; align-items: center; gap: var(--space-1); margin-top: var(--space-4); }
+.reply {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 2rem;
+  padding: 0 var(--space-3);
+  margin-right: var(--space-2);
+  border-radius: var(--radius);
+  background: var(--color-deep);
+  color: var(--color-on-deep);
+  font-size: var(--text-sm);
+  font-weight: 500;
+}
+.reply:hover { background: var(--color-accent); }
+@media (max-width: 760px) {
+  .summary { grid-template-columns: 0.5rem 1fr; }
+  .subject, .date { grid-column: 2; }
+  .body { padding-left: var(--space-5); }
+}

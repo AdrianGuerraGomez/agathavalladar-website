@@ -27,7 +27,7 @@ export function SiteFooter() {
           <ul role="list">
             <li><Link to="/publicaciones">Publicaciones</Link></li>
             <li><Link to="/sobre-mi">Sobre mí</Link></li>
-            <li><Link to="/sobre-mi#contacto">Contacto</Link></li>
+            <li><Link to="/contacto">Contacto</Link></li>
           </ul>
         </nav>
 

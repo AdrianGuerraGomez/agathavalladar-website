@@ -1,4 +1,4 @@
-import { faArrowUpRightFromSquare, faFileLines, faFolderTree, faPenToSquare, faRightFromBracket, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faArrowUpRightFromSquare, faEnvelope, faFileLines, faFolderTree, faPenToSquare, faRightFromBracket, faUser } from '@fortawesome/free-solid-svg-icons';
 import { useQuery } from '@tanstack/react-query';
 import { useEffect } from 'react';
 import { Navigate, NavLink, Outlet, ScrollRestoration, useLocation, useNavigate } from 'react-router';
@@ -13,6 +13,7 @@ const NAV = [
   { to: '/admin', label: 'Artículos', icon: faFileLines, end: true },
   { to: '/admin/articulos/nuevo', label: 'Nuevo artículo', icon: faPenToSquare, end: true },
   { to: '/admin/categorias', label: 'Categorías', icon: faFolderTree, end: true },
+  { to: '/admin/mensajes', label: 'Mensajes', icon: faEnvelope, end: true },
   { to: '/admin/perfil', label: 'Perfil y web', icon: faUser, end: true },
 ];
 

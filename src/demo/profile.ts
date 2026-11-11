@@ -20,7 +20,8 @@ export const defaultProfile: SiteProfile = {
     { title: 'Estrategia geopolítica', description: 'Competencia entre potencias, alianzas y equilibrios en el sistema internacional.' },
     { title: 'Relaciones internacionales', description: 'Marcos analíticos para entender el orden internacional y sus transformaciones.' },
   ],
-  contact_email: null,
+  contact_email: 'contacto@agathavalladar.es', // provisional
+  contact_phone: '+34 949 000 000', // provisional
   linkedin_url: null,
   x_url: null,
   location: 'Guadalajara, Castilla-La Mancha, España',

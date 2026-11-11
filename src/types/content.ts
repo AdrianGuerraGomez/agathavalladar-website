@@ -64,10 +64,21 @@ export interface SiteProfile {
   trajectory: string;
   research_lines: ResearchLine[];
   contact_email: string | null;
+  contact_phone: string | null;
   linkedin_url: string | null;
   x_url: string | null;
   location: string;
   updated_at?: string;
+}
+
+export interface ContactMessage {
+  id: string;
+  name: string;
+  email: string;
+  subject: string | null;
+  message: string;
+  read: boolean;
+  created_at: string;
 }
 
 export interface Paginated<T> {

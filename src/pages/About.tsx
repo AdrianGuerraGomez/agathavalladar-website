@@ -1,5 +1,4 @@
-import { faLinkedinIn, faXTwitter } from '@fortawesome/free-brands-svg-icons';
-import { faArrowRight, faEnvelope, faLocationDot } from '@fortawesome/free-solid-svg-icons';
+import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router';
 import { SectionHeader } from '@/components/articles/SectionHeader';
 import { Icon } from '@/components/ui/Icon';
@@ -86,42 +85,13 @@ export default function About() {
         </section>
       )}
 
-      <section className={styles.section} aria-labelledby="contacto">
-        <SectionHeader index={next()} title="Contacto" id="contacto" />
+      <section className={styles.section} data-reveal>
         <div className={styles.twoCol}>
           <div />
           <div>
-            <p className={styles.contactLead}>
-              Para colaboraciones, entrevistas o consultas sobre mis publicaciones.
-            </p>
-            <ul role="list" className={styles.contactList}>
-              {p.contact_email && (
-                <li>
-                  <Icon icon={faEnvelope} fixedWidth />
-                  <a href={`mailto:${p.contact_email}`}>{p.contact_email}</a>
-                </li>
-              )}
-              {p.linkedin_url && (
-                <li>
-                  <Icon icon={faLinkedinIn} fixedWidth />
-                  <a href={p.linkedin_url} target="_blank" rel="noopener noreferrer me">LinkedIn</a>
-                </li>
-              )}
-              {p.x_url && (
-                <li>
-                  <Icon icon={faXTwitter} fixedWidth />
-                  <a href={p.x_url} target="_blank" rel="noopener noreferrer me">X</a>
-                </li>
-              )}
-              {p.location && (
-                <li>
-                  <Icon icon={faLocationDot} fixedWidth />
-                  <span>{p.location}</span>
-                </li>
-              )}
-            </ul>
-            <Link to="/publicaciones" className={styles.cta}>
-              Leer mis publicaciones <Icon icon={faArrowRight} />
+            <p className={styles.contactLead}>¿Colaboraciones, entrevistas o consultas sobre mis publicaciones?</p>
+            <Link to="/contacto" className={styles.cta}>
+              Ir a contacto <Icon icon={faArrowRight} />
             </Link>
           </div>
         </div>

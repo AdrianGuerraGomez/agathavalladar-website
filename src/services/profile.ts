@@ -4,7 +4,7 @@ import type { SiteProfile } from '@/types/content';
 import { toAppError } from './errors';
 
 const FIELDS =
-  'headline, home_intro, home_about, about_intro, research_profile, franklin, trajectory, research_lines, contact_email, linkedin_url, x_url, location, updated_at';
+  'headline, home_intro, home_about, about_intro, research_profile, franklin, trajectory, research_lines, contact_email, contact_phone, linkedin_url, x_url, location, updated_at';
 
 export async function getProfile(): Promise<SiteProfile> {
   if (!supabase) return defaultProfile;

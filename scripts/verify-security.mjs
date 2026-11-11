@@ -70,6 +70,14 @@ const now = new Date().toISOString();
   check(!!error, 'No puede añadirse como administrador');
 }
 {
+  const { data, error } = await anon.from('contact_messages').select('id');
+  check(!!error || data.length === 0, 'No puede leer los mensajes de contacto');
+}
+{
+  const { error } = await anon.from('contact_messages').insert({ name: 'x', email: 'x@x.es', message: 'mensaje marcado', read: true });
+  check(!!error, 'No puede enviar mensajes ya marcados como leídos');
+}
+{
   const { data } = await anon.rpc('is_admin');
   check(data === false, 'is_admin() devuelve false');
 }

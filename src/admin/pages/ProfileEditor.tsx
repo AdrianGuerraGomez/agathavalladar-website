@@ -31,6 +31,7 @@ const schema = z.object({
   linkedin_url: optionalUrl,
   x_url: optionalUrl,
   location: z.string().max(120, 'Máximo 120 caracteres.'),
+  contact_phone: z.string().trim().max(40, 'Máximo 40 caracteres.').refine((v) => !v || /^[+\d][\d\s().-]{5,}$/.test(v), 'Teléfono no válido.'),
   research_lines: z.array(z.object({ title: z.string().trim().min(1, 'Cada línea necesita un título.'), description: z.string() })),
 });
 
@@ -48,6 +49,7 @@ function Form({ initial }: { initial: ProfileForm }) {
   const [form, setForm] = useState<ProfileForm>({
     ...initial,
     contact_email: initial.contact_email ?? '',
+    contact_phone: initial.contact_phone ?? '',
     linkedin_url: initial.linkedin_url ?? '',
     x_url: initial.x_url ?? '',
   });
@@ -75,6 +77,7 @@ function Form({ initial }: { initial: ProfileForm }) {
       const updated = await updateProfile({
         ...form,
         contact_email: form.contact_email?.trim() || null,
+        contact_phone: form.contact_phone?.trim() || null,
         linkedin_url: form.linkedin_url?.trim() || null,
         x_url: form.x_url?.trim() || null,
         research_lines: form.research_lines.map((l) => ({ title: l.title.trim(), description: l.description.trim() })),
@@ -182,6 +185,11 @@ function Form({ initial }: { initial: ProfileForm }) {
               <label className={styles.fieldLabel} htmlFor="email">Email de contacto</label>
               <input id="email" type="email" className={`${styles.input} ${errors.contact_email ? styles.invalid : ''}`} value={form.contact_email ?? ''} onChange={(e) => set('contact_email', e.target.value)} />
               {err('contact_email') || <p className={styles.fieldHint}>Será visible públicamente.</p>}
+            </div>
+            <div className={styles.field}>
+              <label className={styles.fieldLabel} htmlFor="phone">Teléfono</label>
+              <input id="phone" type="tel" placeholder="+34 600 000 000" className={`${styles.input} ${errors.contact_phone ? styles.invalid : ''}`} value={form.contact_phone ?? ''} onChange={(e) => set('contact_phone', e.target.value)} />
+              {err('contact_phone') || <p className={styles.fieldHint}>Visible en la página de contacto.</p>}
             </div>
             <div className={styles.field}>
               <label className={styles.fieldLabel} htmlFor="location">Ubicación</label>

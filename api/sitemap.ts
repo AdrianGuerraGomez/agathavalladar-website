@@ -20,6 +20,7 @@ export default async function handler(request: Request): Promise<Response> {
     { loc: '/', lastmod: latest, priority: '1.0' },
     { loc: '/publicaciones', lastmod: latest, priority: '0.9' },
     { loc: '/sobre-mi', priority: '0.7' },
+    { loc: '/contacto', priority: '0.6' },
     ...(categories ?? []).map((c) => ({ loc: `/publicaciones?categoria=${c.slug}`, priority: '0.5' })),
     ...(articles ?? []).map((a) => ({ loc: `/publicaciones/${a.slug}`, lastmod: a.updated_at, priority: '0.8' })),
   ];

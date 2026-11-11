@@ -6,7 +6,7 @@ import styles from './layout.module.css';
 const NAV = [
   { to: '/publicaciones', label: 'Publicaciones' },
   { to: '/sobre-mi', label: 'Sobre mí' },
-  { to: '/sobre-mi#contacto', label: 'Contacto' },
+  { to: '/contacto', label: 'Contacto' },
 ];
 
 export function SiteHeader() {
@@ -30,9 +30,8 @@ export function SiteHeader() {
               <li key={item.to}>
                 <NavLink
                   to={item.to}
-                  end={item.to.includes('#')}
                   className={({ isActive }) =>
-                    `${styles.navLink} ${isActive && !item.to.includes('#') ? styles.navLinkActive : ''}`
+                    `${styles.navLink} ${isActive ? styles.navLinkActive : ''}`
                   }
                 >
                   {item.label}
