@@ -13,9 +13,9 @@
   --color-rule: #e4e4e7;
   --color-rule-strong: var(--color-ink);
 
-  --color-accent: #1d4b5a;
-  --color-accent-strong: #133744;
-  --color-accent-soft: #e2ebec;
+  --color-accent: #14452f; /* verde botella */
+  --color-accent-strong: #0c2e1f;
+  --color-accent-soft: #e5eee8;
 
   --color-success: #2f5d46;
   --color-success-soft: #e3ece5;
@@ -24,7 +24,14 @@
   --color-danger: #9a2f2f;
   --color-danger-soft: #f4e4e1;
 
-  --color-focus: #1d4b5a;
+  /* Superficie oscura premium (pie de página, bloques destacados) */
+  --color-deep: #0d261c;
+  --color-deep-2: #12332a;
+  --color-on-deep: #eef3ef;
+  --color-on-deep-muted: #9db3a7;
+  --color-on-deep-rule: rgb(238 243 239 / 0.14);
+
+  --color-focus: #14452f;
   --color-overlay: rgb(26 27 30 / 0.4);
 
   /* Tipografía ------------------------------------------------------------- */

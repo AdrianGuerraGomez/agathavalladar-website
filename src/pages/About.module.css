@@ -101,7 +101,7 @@
   display: grid;
   gap: var(--space-4);
 }
-.notFound .label { color: var(--color-accent); font-size: var(--text-xs); }
+.notFound :global(.label) { color: var(--color-accent); font-size: var(--text-xs); }
 .notFound h1 { font-size: var(--text-title-md); letter-spacing: var(--tracking-snug); line-height: 1.2; }
 .notFound p { color: var(--color-muted); }
 .notFound .cta { justify-self: start; }

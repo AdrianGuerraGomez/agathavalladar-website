@@ -1,3 +1,4 @@
+import type React from 'react';
 import { Link } from 'react-router';
 import { articlePath } from '@/lib/site';
 import type { ArticleSummary } from '@/types/content';
@@ -8,9 +9,9 @@ import styles from './articles.module.css';
 /** Artículo principal de portada: imagen grande y titular destacado. */
 export function ArticleLead({ article }: { article: ArticleSummary }) {
   return (
-    <article className={styles.lead}>
+    <article className={styles.lead} data-reveal>
       <Link to={articlePath(article.slug)} className={styles.leadImage} tabIndex={-1} aria-hidden>
-        <ArticleImage image={article.cover_image} ratio="3/2" priority sizes="(min-width: 900px) 60vw, 100vw" />
+        <ArticleImage image={article.cover_image} ratio="3/2" priority parallax={18} sizes="(min-width: 900px) 60vw, 100vw" />
       </Link>
       <div className={styles.leadText}>
         <CategoryLabel category={article.category} />
@@ -25,11 +26,11 @@ export function ArticleLead({ article }: { article: ArticleSummary }) {
 }
 
 /** Artículo destacado secundario. */
-export function ArticleTeaser({ article }: { article: ArticleSummary }) {
+export function ArticleTeaser({ article, index = 0 }: { article: ArticleSummary; index?: number }) {
   return (
-    <article className={styles.teaser}>
+    <article className={styles.teaser} data-reveal style={{ '--reveal-delay': `${index * 90}ms` } as React.CSSProperties}>
       <Link to={articlePath(article.slug)} tabIndex={-1} aria-hidden className={styles.teaserImage}>
-        <ArticleImage image={article.cover_image} ratio="16/9" sizes="(min-width: 900px) 30vw, 100vw" />
+        <ArticleImage image={article.cover_image} ratio="16/9" parallax={10} sizes="(min-width: 900px) 30vw, 100vw" />
       </Link>
       <CategoryLabel category={article.category} />
       <h3 className={styles.teaserTitle}>

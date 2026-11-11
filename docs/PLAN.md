@@ -192,9 +192,10 @@ La referencia no es un blog, sino la primera página de una revista de análisis
 | `--color-muted` | `#62656B` | Metadatos, entradillas secundarias |
 | `--color-subtle` | `#76797F` | Información terciaria, marcadores de posición |
 | `--color-rule` | `#E4E4E7` | Filetes finos |
-| `--color-accent` | `#1D4B5A` | **Azul petróleo**: categorías, enlaces, cifras de sección |
-| `--color-accent-strong` | `#133744` | Hover |
-| `--color-accent-soft` | `#E2EBEC` | Selección de texto, fondos de estado |
+| `--color-accent` | `#14452F` | **Verde botella**: categorías, enlaces, cifras de sección, detalles |
+| `--color-deep` | `#0D261C` | Verde casi negro: pie de página y bloques premium |
+| `--color-accent-strong` | `#0C2E1F` | Hover |
+| `--color-accent-soft` | `#E5EEE8` | Selección de texto, fondos de estado |
 
 El azul petróleo se eligió frente al marino (demasiado corporativo) y al verde (asociado a sostenibilidad): evoca el Atlántico, que es literalmente el objeto de estudio, y tiene la sobriedad de la tinta de imprenta. Se usa en menos del 5 % de la superficie.
 

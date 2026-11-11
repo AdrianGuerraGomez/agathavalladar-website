@@ -15,7 +15,7 @@ interface Props {
 /** Encabezado de sección numerado: filete fuerte + «01 Título». */
 export function SectionHeader({ index, title, id, link }: Props) {
   return (
-    <header className={styles.sectionHeader}>
+    <header className={styles.sectionHeader} data-reveal>
       <h2 id={id} className={`label ${styles.sectionTitle}`}>
         {index && <span className={`tabular ${styles.sectionIndex}`}>{index}</span>}
         {title}

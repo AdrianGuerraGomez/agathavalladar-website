@@ -3,7 +3,7 @@
 import { mkdirSync, writeFileSync } from 'node:fs';
 
 const W = 1600, H = 1000;
-const C = { paper: '#E9E5DC', paper2: '#DCD6CA', ink: '#1A1B1E', accent: '#1D4B5A', accent2: '#3E6F7D', sand: '#C9BFAE' };
+const C = { paper: '#EEF1EE', paper2: '#E3E8E4', ink: '#1A1B1E', accent: '#14452F', accent2: '#2E6B4F', sand: '#C3CFC6' };
 mkdirSync('public/demo', { recursive: true });
 
 function rng(seed) { let s = seed; return () => ((s = (s * 16807) % 2147483647) / 2147483647); }

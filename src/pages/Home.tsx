@@ -1,3 +1,4 @@
+import type React from 'react';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router';
 import { ArticleLead, ArticleTeaser } from '@/components/articles/ArticleLead';
@@ -7,6 +8,7 @@ import { Icon } from '@/components/ui/Icon';
 import { ErrorState, EmptyState } from '@/components/ui/States';
 import { useCategories, useFeaturedArticles, useProfile, useRecentArticles } from '@/hooks/queries';
 import { formatToday } from '@/lib/format';
+import { useScrollShift } from '@/lib/motion';
 import { usePageMeta } from '@/lib/meta';
 import { SITE, absoluteUrl } from '@/lib/site';
 import styles from './Home.module.css';
@@ -16,6 +18,7 @@ export default function Home() {
   const featured = useFeaturedArticles(3);
   const recent = useRecentArticles(6);
   const categories = useCategories();
+  const heroRef = useScrollShift<HTMLDivElement>(0.16);
 
   usePageMeta({
     path: '/',
@@ -47,13 +50,13 @@ export default function Home() {
         </div>
 
         <div className={styles.heroGrid}>
-          <div className={styles.heroMain}>
+          <div className={styles.heroMain} ref={heroRef}>
             <p className={`label ${styles.kicker}`}>{p?.headline || 'Investigadora | Política exterior | Relaciones internacionales'}</p>
             <h1 id="hero-title" className={styles.statement}>
               {p?.home_intro}
             </h1>
           </div>
-          <aside className={styles.heroAside} aria-label="Áreas de investigación">
+          <aside className={styles.heroAside} aria-label="Áreas de investigación" data-reveal style={{ '--reveal-delay': '200ms' } as React.CSSProperties}>
             <p className={`label ${styles.asideLabel}`}>Áreas</p>
             <ul role="list" className={styles.areaList}>
               {(categories.data ?? []).map((c) => (
@@ -83,7 +86,7 @@ export default function Home() {
             <ArticleLead article={lead} />
             {teasers.length > 0 && (
               <div className={styles.teasers}>
-                {teasers.map((a) => <ArticleTeaser key={a.id} article={a} />)}
+                {teasers.map((a, i) => <ArticleTeaser key={a.id} article={a} index={i} />)}
               </div>
             )}
           </>
@@ -108,7 +111,7 @@ export default function Home() {
           <SectionHeader index="03" title="Líneas de investigación" id="lineas" />
           <ol role="list" className={styles.lines}>
             {p.research_lines.map((line, i) => (
-              <li key={line.title} className={styles.line}>
+              <li key={line.title} className={styles.line} data-reveal style={{ '--reveal-delay': `${(i % 3) * 90}ms` } as React.CSSProperties}>
                 <span className={`tabular ${styles.lineIndex}`}>{String(i + 1).padStart(2, '0')}</span>
                 <h3 className={styles.lineTitle}>{line.title}</h3>
                 <p className={styles.lineText}>{line.description}</p>
@@ -122,7 +125,7 @@ export default function Home() {
       {p?.home_about && (
         <section className={`container ${styles.section}`} aria-labelledby="autora">
           <SectionHeader index="04" title="Sobre la autora" id="autora" />
-          <div className={styles.about}>
+          <div className={styles.about} data-reveal>
             <p className={styles.aboutName}>{SITE.name}</p>
             <div className={styles.aboutBody}>
               <p className={styles.aboutText}>{p.home_about}</p>
@@ -136,7 +139,7 @@ export default function Home() {
 
       {/* Archivo ----------------------------------------------------------- */}
       <section className={`container ${styles.archiveCta}`}>
-        <Link to="/publicaciones" className={styles.archiveLink}>
+        <Link to="/publicaciones" className={styles.archiveLink} data-reveal>
           <span className="label">Archivo</span>
           <span className={styles.archiveText}>Consulta todas las publicaciones</span>
           <Icon icon={faArrowRight} className={styles.archiveArrow} />

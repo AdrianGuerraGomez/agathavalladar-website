@@ -2,11 +2,14 @@ import { Outlet, ScrollRestoration, useLocation } from 'react-router';
 import { isDemoMode } from '@/lib/env';
 import { SiteFooter } from './SiteFooter';
 import { SiteHeader } from './SiteHeader';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
+import { useRevealOnScroll } from '@/lib/motion';
 import styles from './layout.module.css';
 
 export function PublicLayout() {
   const location = useLocation();
+  const mainRef = useRef<HTMLElement>(null);
+  useRevealOnScroll(mainRef, location.pathname);
 
   // Desplazamiento a anclas (#contacto) tras navegar.
   useEffect(() => {
@@ -26,7 +29,7 @@ export function PublicLayout() {
         </div>
       )}
       <SiteHeader />
-      <main id="contenido" key={location.pathname} className={`page-enter ${styles.main}`}>
+      <main ref={mainRef} id="contenido" key={location.pathname} className={`page-enter ${styles.main}`}>
         <Outlet />
       </main>
       <SiteFooter />

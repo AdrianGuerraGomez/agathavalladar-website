@@ -19,8 +19,8 @@ import styles from './ArticlePage.module.css';
 
 function Figure({ image, priority, wide }: { image: Img; priority?: boolean; wide?: boolean }) {
   return (
-    <figure className={`${styles.figure} ${wide ? styles.figureWide : ''}`}>
-      <ArticleImage image={image} ratio="natural" priority={priority} />
+    <figure className={`${styles.figure} ${wide ? styles.figureWide : ''}`} data-reveal={wide ? undefined : true}>
+      <ArticleImage image={image} ratio="natural" priority={priority} parallax={wide ? 22 : 12} />
       {image.caption && <figcaption className={styles.caption}>{image.caption}</figcaption>}
     </figure>
   );
@@ -136,7 +136,7 @@ export default function ArticlePage() {
           {article.secondary_image && <Figure image={article.secondary_image} />}
           {secondHalf && <div className={`prose ${styles.body}`} dangerouslySetInnerHTML={{ __html: secondHalf }} />}
 
-          <footer className={styles.footer}>
+          <footer className={styles.footer} data-reveal>
             <ShareBar url={url} title={article.title} />
             <div className={styles.authorBox}>
               <p className="label">Sobre la autora</p>
@@ -151,7 +151,7 @@ export default function ArticlePage() {
       </article>
 
       <nav className={`container ${styles.adjacent}`} aria-label="Más publicaciones">
-        <div className={styles.adjacentGrid}>
+        <div className={styles.adjacentGrid} data-reveal>
           {neighbors.data?.previous ? (
             <Link to={articlePath(neighbors.data.previous.slug)} className={styles.adjacentLink} rel="prev">
               <span className={`label ${styles.adjacentLabel}`}><Icon icon={faArrowLeft} /> Anterior</span>

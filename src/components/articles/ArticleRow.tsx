@@ -11,7 +11,7 @@ export function ArticleRow({ article, showImage = true, headingLevel = 3 }: { ar
   const { day, month, year } = dateParts(article.published_at);
   const Heading = headingLevel === 2 ? 'h2' : 'h3';
   return (
-    <article className={`${styles.row} ${showImage ? styles.rowWithImage : ''}`}>
+    <article className={`${styles.row} ${showImage ? styles.rowWithImage : ''}`} data-reveal>
       <time dateTime={article.published_at} className={`tabular ${styles.rowDate}`}>
         <span className={styles.rowDay}>{day}</span>
         <span>{month} {year}</span>

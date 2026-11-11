@@ -267,3 +267,28 @@ button {
 .prose > :first-child {
   margin-top: 0;
 }
+
+/* Movimiento sutil ---------------------------------------------------------- */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 700ms var(--ease), transform 900ms var(--ease);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+[data-reveal][data-revealed] {
+  opacity: 1;
+  transform: none;
+}
+
+/* Imagen con parallax interno: la imagen se mueve dentro de su marco. */
+.parallax-media img {
+  scale: 1.08;
+  translate: 0 var(--parallax, 0px);
+  transition: scale var(--duration-slow) var(--ease);
+  will-change: translate;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] { opacity: 1; transform: none; transition: none; }
+  .parallax-media img { scale: 1; translate: none; }
+}

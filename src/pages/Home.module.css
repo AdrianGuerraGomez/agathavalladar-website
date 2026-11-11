@@ -149,7 +149,7 @@
   border-bottom: var(--rule-strong);
   color: var(--color-ink);
 }
-.archiveLink .label { color: var(--color-accent); font-size: var(--text-xs); }
+.archiveLink :global(.label) { color: var(--color-accent); font-size: var(--text-xs); }
 .archiveText {
   font-size: var(--text-title-md);
   font-weight: 500;
@@ -161,5 +161,63 @@
 .archiveLink:hover .archiveArrow { transform: translateX(6px); }
 @media (max-width: 600px) {
   .archiveLink { grid-template-columns: 1fr auto; gap: var(--space-2) var(--space-4); }
-  .archiveLink .label { grid-column: 1 / -1; }
+  .archiveLink :global(.label) { grid-column: 1 / -1; }
+}
+
+/* Movimiento de cabecera ---------------------------------------------------- */
+.heroMain {
+  translate: 0 var(--scroll-shift, 0px);
+  opacity: var(--scroll-fade, 1);
+  will-change: translate, opacity;
+}
+.kicker { animation: rise 800ms var(--ease) 80ms both; }
+.statement { animation: rise 1000ms var(--ease) 160ms both; }
+@keyframes rise {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* Detalle verde: filete corto bajo el kicker */
+.kicker::after {
+  content: '';
+  display: block;
+  width: 2.5rem;
+  height: 2px;
+  margin-top: var(--space-3);
+  background: var(--color-accent);
+  transform-origin: left;
+  animation: grow 900ms var(--ease) 500ms both;
+}
+@keyframes grow { from { transform: scaleX(0); } }
+
+.line { transition: border-color var(--duration) var(--ease); }
+.line:hover { border-top-color: var(--color-accent); }
+.lineIndex { display: inline-block; transition: transform var(--duration) var(--ease); }
+.line:hover .lineIndex { transform: translateX(4px); }
+
+/* Bloque de archivo: se rellena de verde botella al pasar */
+.archiveLink {
+  position: relative;
+  isolation: isolate;
+  padding-inline: var(--space-5);
+  transition: color var(--duration-slow) var(--ease), border-color var(--duration-slow) var(--ease);
+}
+.archiveLink::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--color-deep);
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform 500ms var(--ease);
+}
+.archiveLink:hover { color: var(--color-on-deep); border-color: var(--color-deep); }
+.archiveLink:hover::before { transform: scaleY(1); }
+.archiveLink:hover .archiveText { color: var(--color-on-deep); }
+.archiveLink:hover :global(.label) { color: var(--color-on-deep-muted); }
+
+@media (prefers-reduced-motion: reduce) {
+  .heroMain { translate: none; opacity: 1; }
+  .kicker, .statement, .kicker::after { animation: none; }
 }

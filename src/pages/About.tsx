@@ -57,7 +57,7 @@ export default function About() {
       </header>
 
       {hasContent(p.about_intro) && (
-        <section className={styles.intro} aria-label="Presentación">
+        <section className={styles.intro} aria-label="Presentación" data-reveal>
           <div className={`prose ${styles.introText}`} dangerouslySetInnerHTML={{ __html: sanitizeWithLinks(p.about_intro) }} />
         </section>
       )}
@@ -65,7 +65,7 @@ export default function About() {
       {sections.map((s) => (
         <section key={s.id} className={styles.section} aria-labelledby={s.id}>
           <SectionHeader index={next()} title={s.title} id={s.id} />
-          <div className={styles.twoCol}>
+          <div className={styles.twoCol} data-reveal>
             <div />
             <div className="prose" dangerouslySetInnerHTML={{ __html: sanitizeWithLinks(s.html) }} />
           </div>
@@ -77,7 +77,7 @@ export default function About() {
           <SectionHeader index={next()} title="Áreas y líneas de investigación" id="lineas" />
           <ol role="list" className={styles.lines}>
             {p.research_lines.map((l) => (
-              <li key={l.title} className={styles.lineItem}>
+              <li key={l.title} className={styles.lineItem} data-reveal>
                 <h3>{l.title}</h3>
                 <p>{l.description}</p>
               </li>

@@ -96,7 +96,7 @@
   font-size: var(--text-base-ui);
   line-height: 1.6;
 }
-.authorBox .label { color: var(--color-muted); font-size: var(--text-xs); }
+.authorBox :global(.label) { color: var(--color-muted); font-size: var(--text-xs); }
 .authorBox strong { color: var(--color-ink); font-weight: 600; }
 .authorBox a { color: var(--color-accent); text-decoration: underline; text-underline-offset: 0.2em; }
 
@@ -159,3 +159,6 @@
   .adjacentNext { border-top: var(--hairline); }
   .adjacentNext .adjacentLabel { justify-content: flex-start; }
 }
+
+/* Detalle verde: la cita y el filete de autora */
+.authorBox { border-left: 2px solid var(--color-accent); }
