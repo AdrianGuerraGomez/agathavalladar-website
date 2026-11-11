@@ -13,6 +13,13 @@ export function imageUrl(image: Pick<ArticleImage, 'path'> | null | undefined): 
     .join('/')}`;
 }
 
+/** URL para tarjetas sociales (LinkedIn y X no muestran SVG). */
+export function socialImageUrl(image: Pick<ArticleImage, 'path'> | null | undefined): string | null {
+  if (!image?.path) return null;
+  if (!/\.svg$/i.test(image.path)) return imageUrl(image);
+  return image.path.startsWith('/demo/') ? image.path.replace(/\.svg$/i, '.png') : null;
+}
+
 export interface ProcessedImage {
   blob: Blob;
   width: number;
@@ -25,11 +32,16 @@ const QUALITY = 0.82;
 export const ACCEPTED_IMAGE_TYPES = ['image/jpeg', 'image/png', 'image/webp', 'image/avif'];
 export const MAX_INPUT_BYTES = 25 * 1024 * 1024;
 
+export type ImageFormat = 'webp' | 'jpeg';
+
 /**
- * Redimensiona (máx. 2400 px) y convierte a WebP en el navegador antes de subir.
- * Una foto de 6 MB suele quedar en 200–400 KB sin pérdida visible.
+ * Redimensiona (máx. 2400 px) y comprime en el navegador antes de subir.
+ * - `webp`: más ligera, para imágenes que solo se ven en la web.
+ * - `jpeg`: compatible con todas las redes (LinkedIn no siempre acepta WebP);
+ *   se usa para la imagen principal, que es la que se comparte.
+ * Una foto de 6 MB suele quedar en 200–500 KB sin pérdida visible.
  */
-export async function processImage(file: File): Promise<ProcessedImage> {
+export async function processImage(file: File, format: ImageFormat = 'webp'): Promise<ProcessedImage> {
   if (!ACCEPTED_IMAGE_TYPES.includes(file.type)) {
     throw new Error('Formato no admitido. Usa JPG, PNG, WebP o AVIF.');
   }
@@ -49,6 +61,16 @@ export async function processImage(file: File): Promise<ProcessedImage> {
   ctx.imageSmoothingQuality = 'high';
   ctx.drawImage(bitmap, 0, 0, width, height);
   bitmap.close();
+
+  if (format === 'jpeg') {
+    // JPEG no tiene transparencia: fondo blanco para PNG con alfa.
+    ctx.globalCompositeOperation = 'destination-over';
+    ctx.fillStyle = '#ffffff';
+    ctx.fillRect(0, 0, width, height);
+    const jpeg = await new Promise<Blob | null>((resolve) => canvas.toBlob(resolve, 'image/jpeg', QUALITY));
+    if (!jpeg) throw new Error('No se pudo comprimir la imagen.');
+    return { blob: jpeg, width, height, type: 'image/jpeg' };
+  }
 
   const blob = await new Promise<Blob | null>((resolve) => canvas.toBlob(resolve, 'image/webp', QUALITY));
   if (blob && blob.type === 'image/webp') {

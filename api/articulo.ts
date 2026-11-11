@@ -6,7 +6,7 @@
  * JSON-LD). Así LinkedIn, X o WhatsApp muestran la tarjeta correcta aunque
  * no ejecuten JavaScript. El navegador recibe la SPA de siempre.
  */
-import { escapeHtml, getEnv, imagePublicUrl, supabaseSelect } from './_shared';
+import { escapeHtml, getEnv, imagePublicUrl, socialImagePath, supabaseSelect } from './_shared';
 
 export const config = { runtime: 'edge' };
 
@@ -45,7 +45,8 @@ export default async function handler(request: Request): Promise<Response> {
       const title = a.seo_title || a.title;
       const description = (a.seo_description || a.excerpt).slice(0, 300);
       const canonical = `${siteUrl}/publicaciones/${a.slug}`;
-      const image = imagePublicUrl(a.cover_image?.path, siteUrl) ?? `${siteUrl}/og-default.png`;
+      const socialPath = socialImagePath(a.cover_image?.path);
+      const image = imagePublicUrl(socialPath, siteUrl) ?? `${siteUrl}/og-default.png`;
       const jsonLd = {
         '@context': 'https://schema.org',
         '@type': 'Article',
@@ -71,8 +72,8 @@ export default async function handler(request: Request): Promise<Response> {
         `<meta property="og:url" content="${e(canonical)}" />`,
         `<meta property="og:image" content="${e(image)}" />`,
         a.cover_image?.alt ? `<meta property="og:image:alt" content="${e(a.cover_image.alt)}" />` : '',
-        a.cover_image?.width ? `<meta property="og:image:width" content="${a.cover_image.width}" />` : '',
-        a.cover_image?.height ? `<meta property="og:image:height" content="${a.cover_image.height}" />` : '',
+        socialPath && a.cover_image?.width ? `<meta property="og:image:width" content="${a.cover_image.width}" />` : '',
+        socialPath && a.cover_image?.height ? `<meta property="og:image:height" content="${a.cover_image.height}" />` : '',
         `<meta property="article:published_time" content="${e(a.published_at)}" />`,
         `<meta property="article:modified_time" content="${e(a.updated_at)}" />`,
         `<meta property="article:author" content="${SITE_NAME}" />`,

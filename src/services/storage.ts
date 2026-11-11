@@ -1,11 +1,11 @@
-import { processImage } from '@/lib/images';
+import { processImage, type ImageFormat } from '@/lib/images';
 import { IMAGE_BUCKET, requireSupabase } from '@/lib/supabase';
 import type { ArticleImage } from '@/types/content';
 import { toAppError } from './errors';
 
 /** Comprime y sube una imagen. Devuelve la ruta y dimensiones. */
-export async function uploadImage(file: File): Promise<Pick<ArticleImage, 'path' | 'width' | 'height'>> {
-  const processed = await processImage(file);
+export async function uploadImage(file: File, format: ImageFormat = 'webp'): Promise<Pick<ArticleImage, 'path' | 'width' | 'height'>> {
+  const processed = await processImage(file, format);
   const ext = processed.type === 'image/webp' ? 'webp' : processed.type === 'image/png' ? 'png' : 'jpg';
   const year = new Date().getFullYear();
   const path = `articles/${year}/${crypto.randomUUID()}.${ext}`;

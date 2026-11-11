@@ -125,7 +125,8 @@ function EditorForm({ article }: { article: Article | null }) {
         return;
       }
 
-      const cover = await resolveDraft(next.cover);
+      // La principal en JPEG: es la que muestran LinkedIn, X o WhatsApp al compartir.
+      const cover = await resolveDraft(next.cover, 'jpeg');
       if (next.cover?.file && cover) uploaded.push(cover.path);
       const secondary = await resolveDraft(next.secondary);
       if (next.secondary?.file && secondary) uploaded.push(secondary.path);

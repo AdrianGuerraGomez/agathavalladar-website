@@ -22,6 +22,16 @@ export function escapeHtml(value: string): string {
   return value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
 
+/**
+ * Ruta apta para tarjetas sociales: LinkedIn y X no muestran SVG.
+ * Las portadas demo tienen copia PNG; cualquier otro SVG usa la imagen por defecto.
+ */
+export function socialImagePath(path: string | undefined | null): string | null {
+  if (!path) return null;
+  if (!/\.svg$/i.test(path)) return path;
+  return path.startsWith('/demo/') ? path.replace(/\.svg$/i, '.png') : null;
+}
+
 export function imagePublicUrl(path: string | undefined | null, siteUrl: string): string | null {
   if (!path) return null;
   if (/^https?:\/\//.test(path)) return path;

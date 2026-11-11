@@ -9,7 +9,7 @@ import { PageLoader } from '@/components/ui/Spinner';
 import { ErrorState } from '@/components/ui/States';
 import { useArticle, useArticleNeighbors } from '@/hooks/queries';
 import { formatDate, formatTime, plainText, readingMinutes, truncate } from '@/lib/format';
-import { imageUrl } from '@/lib/images';
+import { socialImageUrl } from '@/lib/images';
 import { usePageMeta } from '@/lib/meta';
 import { sanitizeWithLinks, splitBodyForInsert } from '@/lib/sanitize';
 import { SITE, absoluteUrl, articlePath } from '@/lib/site';
@@ -65,7 +65,7 @@ export default function ArticlePage() {
           title: article.seo_title || article.title,
           description,
           path: articlePath(article.slug),
-          image: imageUrl(article.cover_image),
+          image: socialImageUrl(article.cover_image),
           type: 'article',
           publishedTime: article.published_at,
           modifiedTime: article.updated_at,
@@ -74,7 +74,7 @@ export default function ArticlePage() {
             '@type': 'Article',
             headline: article.title,
             description,
-            image: article.cover_image ? [absoluteUrl(imageUrl(article.cover_image)!)] : undefined,
+            image: socialImageUrl(article.cover_image) ? [absoluteUrl(socialImageUrl(article.cover_image)!)] : undefined,
             datePublished: article.published_at,
             dateModified: article.updated_at,
             inLanguage: 'es',

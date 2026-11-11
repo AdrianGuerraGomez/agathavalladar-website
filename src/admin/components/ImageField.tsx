@@ -96,7 +96,7 @@ export function ImageField({ label, hint, value, onChange, error, altError }: Pr
               <Icon icon={faTrashCan} /> Quitar
             </button>
           </div>
-          {value.file && <p className={local.pending}>Se subirá al guardar · se optimizará automáticamente</p>}
+          {value.file && <p className={local.pending}>Se subirá al guardar y se optimizará automáticamente</p>}
         </div>
       ) : (
         <button
